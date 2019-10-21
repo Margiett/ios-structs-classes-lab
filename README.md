@@ -16,6 +16,7 @@ class Giant {
 
 let fred = Giant()
 ```
+My answer Fred represents giant 
 
 Will these three lines of code run? If not, why not?
 
@@ -24,8 +25,26 @@ fred.name = "Brick"
 fred.weight = 999.2
 fred.homePlanet = "Mars"
 ```
+```
+My answer does not code because on line 14 is a let and is a constant and in order for the code to work line 14 has to be a var instead of a le 
+```
 
 Fix the class definition for `Giant` in the space below so that it **does** work:
+
+class Giant {
+ var name: String = "Fred"
+ var weight: Double = 340.0
+ var homePlanet: String = "Earth"
+}
+
+let fred = Giant()
+
+
+//Will these three lines of code run? If not, why not?
+
+fred.name = "Brick"
+fred.weight = 999.2
+fred.homePlanet = "Mars"
 
 
 ## Question 2
@@ -40,6 +59,9 @@ struct Alien {
 }
 let bilbo = Alien(name: "Bilbo", height: 1.67, homePlanet: "Venus")
 ```
+```
+My answer is bilbo represents alien 
+```
 
 Will these three lines of code run? If so, why not?
 
@@ -48,9 +70,26 @@ bilbo.name = "Jake"
 bilbo.height = 1.42
 bilbo.homePlanet = "Saturn"
 ```
-
+```My answer: these line does not compile because on line 59 it has to be a var instead of a let because let is a constant 
+```
 Change the declaration of `bilbo` so that the above three lines of code **do** work:
 
+```My answer:
+struct Alien {
+ var name: String
+ var height: Double
+ var homePlanet: String
+}
+var bilbo = Alien(name: "Bilbo", height: 1.67, homePlanet: "Venus")
+
+bilbo.name = "Jake"
+bilbo.height = 1.42
+bilbo.homePlanet = "Saturn"
+
+I changed : let bilbo = Alien(name: "Bilbo", height: 1.67, homePlanet: "Venus")
+to 
+var bilbo = Alien(name: "Bilbo", height: 1.67, homePlanet: "Venus")
+```
 
 ## Question 3
 
@@ -65,7 +104,22 @@ jason.name = "Jason"
 
 What will the value of `edgar.name` be after those three lines of code are run? What will the value of `jason.name` be? Why?
 
+```My answer: 
+class Giant {
+ var name: String = "Fred"
+ var weight: Double = 340.0
+ let homePlanet: String = "Earth"
+}
 
+let edgar = Giant()
+edgar.name = "edgar"
+let jason = edgar
+jason.name = "Jason" 
+print(jason.name)
+print(edgar.name)
+
+the value of edgar would be Jason because of like 114 jason.name = "Jason"
+```
 ## Question 4
 
 Given this bit of code that uses the `Alien` struct:
@@ -78,7 +132,19 @@ charlesFromJupiter.homePlanet = "Jupiter"
 
 What will the value of `charles.homePlanet` be after the above code run? What about the value of `charlesFromJupiter.homePlanet`? Why?
 
+```My Answer: is it would be Alien
 
+struct Alien {
+ var name: String
+ var height: Double
+ var homePlanet: String
+}
+let bilbo = Alien(name: "Bilbo", height: 1.67, homePlanet: "Venus")
+
+var charles = Alien(name: "Charles", height: 2.25, homePlanet: "Pluto")
+var charlesFromJupiter = charles
+charlesFromJupiter.homePlanet = "Jupiter"
+```
 ## Question 5
 
 Here's a struct that represents a bank account:
@@ -99,8 +165,21 @@ struct BankAccount {
 ```
 
 Does this code work? Why or why not?
-
+My answer is: it does not work because it has compile errors due to because mutating has to be in front of func because func is like a constance and mutating allows it to change  also it only goes in structs 
 Fix the `BankAccount` struct so it does work.
+
+struct BankAccount {
+ var owner: String
+ var balance: Double
+
+    mutating func deposit(_ amount: Double) {
+ balance += amount
+ }
+
+ mutating func withdraw(_ amount: Double) {
+ balance -= amount
+ }
+}
 
 Given the code below (which should incorporate any fixes you made):
 
@@ -111,22 +190,71 @@ joeAccount.withdraw(50.0)
 ```
 
 What will the value of `joeAccount.balance` be after the above code runs? What about the value of `joeOtherAccount.balance`? Why?
+My answer: 50.0
+struct BankAccount {
+ var owner: String
+ var balance: Double
 
+    mutating func deposit(_ amount: Double) {
+ balance += amount
+ }
+
+ mutating func withdraw(_ amount: Double) {
+ balance -= amount
+ }
+}
+var joeAccount = BankAccount(owner: "Joe", balance: 100.0)
+var joeOtherAccount = joeAccount
+joeAccount.withdraw(50.0)
+print(joeAccount.balance)
+
+because Joe has 100 $ and he withdraws 50 which is subtracting is the reason why he has 50.0 and on line 199 withdraw is meant to subtract 
 
 ## Question 6
 
 a. Write a struct called `Person` that has 3 properties of type `String`: a first name, a last name and a middle name. Have the middle name be optional. Create 2 instances of a `Person`, one with a middle name and one without. Print one of their first names.
 
+```My answer:
+struct Person {
+    var firstName: String
+    var lastName: String
+    var middleName: String?
+    
+}
+var person1 = Person(firstName: "Margiett", lastName: "Gil", middleName: "Xiomara")
+var person2 = Person(firstName: "Jasmin", lastName: "Gil", middleName: nil)
+print(person2.firstName)
+```
 
 b. Write a method in `Person` called `fullName` that will return a formatted string of an instance's full name. Call this method on both the instances you created in part a.
 
-
+```struct Person {
+    var firstName = String()
+    var lastName = String()
+    var middleName: String?
+    
+    func fullName() -> String {
+       return "\(firstName) \(middleName ?? "") \(lastName)"
+    }
+}
+var person1 = Person(firstName: "Margiett", lastName: "Gil", middleName: "Xiomara")
+var person2 = Person(firstName: "Jasmin", lastName: "Leon", middleName: nil)
+print(person2.firstName)
+print(person1.fullName())
+print(person2.fullName())
+```
 ## Question 7
 
 a. Create a struct called `Book` that has properties `title`, `author` and `rating`, of type `String`, `String`, and `Double` respectively. Create some instances of `Book`.
-
+```
+struct Book {
+var title = String()
+var aurthor = String()
+var rating: Double
+```
 
 b. Add a method to `Book` called `isGood` that returns `true` if its rating is greater than or equal to 7
+
 
 
 ## Question 8
